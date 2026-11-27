@@ -1,0 +1,34 @@
+ЗАПУСК ПРОЕКТА PC Builder
+
+1. Распакуйте архив и откройте терминал (PowerShell) в папке проекта рядом с файлом artisan.
+
+2. Требуется PHP 8.3+ с расширением pdo_pgsql, Composer и запущенный PostgreSQL (pgAdmin 4).
+   Если папки vendor нет в проекте, выполните:
+   composer install
+
+3. Создайте пустую базу данных в PostgreSQL через pgAdmin 4:
+   CREATE DATABASE pc_builder;
+
+4. Скопируйте файл настроек:
+   Copy-Item .env.example .env
+
+5. В файле .env укажите ваш пароль от PostgreSQL:
+   DB_CONNECTION=pgsql
+   DB_HOST=127.0.0.1
+   DB_PORT=5432
+   DB_DATABASE=pc_builder
+   DB_USERNAME=postgres
+   DB_PASSWORD=ваш_пароль
+
+6. Выполните команды запуска и заполнения БД:
+   php artisan key:generate
+   php artisan config:clear
+   php artisan migrate --seed
+   php artisan serve
+
+7. Откройте адрес http://127.0.0.1:8000 в браузере.
+
+ТЕСТОВЫЕ АККАУНТЫ ПОСЛЕ СИДЕРА:
+- Пользователь: логин user / пароль password123
+- Сборщик:      логин builder / пароль password123
+- Админ:        логин admin / пароль password123
